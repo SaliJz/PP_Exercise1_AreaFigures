@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace PP_Semana2_Ejercicio1
 {
-    //public class Rectangle : Figure
-    //{
-    //    private double baseLength;
-    //    private double height;
+    public class Rectangle : Figure
+    {
+        private float baseLength;
+        private float height;
 
-    //    public Rectangle(double baseLength, double height)
-    //    {
-    //        this.baseLength = baseLength;
-    //        this.height = height;
-    //    }
+        public Rectangle(float baseLength, float height)
+        {
+            this.baseLength = baseLength;
+            this.height = height;
+        }
 
-    //    public override double GetArea()
-    //    {
-    //        return baseLength * height;
-    //    }
-    //}
+        public override float GetArea()
+        {
+            return baseLength * height;
+        }
+    }
 }
