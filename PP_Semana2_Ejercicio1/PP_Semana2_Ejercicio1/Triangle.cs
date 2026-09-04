@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1.Figures
+namespace PP_Semana2_Ejercicio1
 {
-    class Triangle : Figures
+    public class Triangle : Figure
     {
         private float b;
         private float h;
@@ -17,7 +17,7 @@ namespace ConsoleApp1.Figures
             this.h = h;
         }
         
-        public override float Area()
+        public override float GetArea()
         {
             return b * h / 2;
         }
