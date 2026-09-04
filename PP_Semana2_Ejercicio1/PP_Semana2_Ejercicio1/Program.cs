@@ -10,6 +10,9 @@ namespace PP_Semana2_Ejercicio1
     {
         static void Main(string[] args)
         {
+            Menu menu = new Menu();
+
+            menu.Ejecutar();
         }
     }
 }
