@@ -1,150 +1,135 @@
-﻿using System;
+﻿using PP_Semana2_Ejercicio1;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clase2Progra
+namespace PP_Semana2_Ejercicio1
 {
     internal class Menu
     {
-       private void Ejecutar()
+       public void Ejecutar()
         {
             bool continuar = true;
+
             while (continuar)
             {
                 Console.WriteLine("¿Qué figura desea operar?");
+                Console.WriteLine();
                 Console.WriteLine("1.Rectángulo");
                 Console.WriteLine("2.Cuadrado");
                 Console.WriteLine("3.Círculo");
                 Console.WriteLine("4.Triángulo");
+                Console.WriteLine();
+                Console.Write("Seleccione una figura: ");
 
-                int numero = int.Parse(Console.ReadLine());
-                float area = 0;
+                string option = Console.ReadLine();
 
-                switch (numero)
+                Figure figure = null;
+
+                switch (option)
                 {
-                    case 1: /*Rectangulo*/
-                        Console.WriteLine("Introduzca la base");
-                        int Base = int.Parse(Console.ReadLine());
+                    case "1": /*Rectangulo*/
+                        try
+                        {
+                            Console.WriteLine("Introduzca la base");
+                            float rectangleBase = float.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Introduzca la altura");
-                        int altura = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Introduzca la altura");
+                            float rectangleHeight = float.Parse(Console.ReadLine());
 
-                        Rectangle rectangulo = new Rectangle(Base, altura);
-
-                        area = rectangulo.GetArea();
-
-                        break;
-
-                    case 2: /*Cuadrado*/
-                        Console.WriteLine("Introduzca el lado");
-                        int lado = int.Parse(Console.ReadLine());
-                        area = Cuadrado.CalcularArea(lado);
-
-                        break;
-
-                    case 3: /*Circulo*/
-                        Console.WriteLine("Introduzca el radio");
-                        int radio = int.Parse(Console.ReadLine());
-                        area = Circulo.CalcularArea(radio);
+                            figure = new Rectangle(rectangleBase, rectangleHeight);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Error: Introduzca valores numéricos válidos.");
+                            Console.ReadKey();
+                        }
 
                         break;
 
-                    case 4: /*Triangulo*/
-                        Console.WriteLine("Introduzca la base");
-                        int baseTriangulo = int.Parse(Console.ReadLine());
+                    case "2": /*Cuadrado*/
+                        try
+                        {
+                            Console.WriteLine("Introduzca el lado");
+                            float squareSide = float.Parse(Console.ReadLine());
 
-                        Console.WriteLine("Introduzca la altura");
-                        int alturaTriangulo = int.Parse(Console.ReadLine());
-
-                        area = Triangulo.CalcularArea(baseTriangulo, alturaTriangulo);
+                            figure = new Square(squareSide);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Error: Introduzca un valor numérico válido.");
+                            Console.ReadKey();
+                        }
 
                         break;
+
+                    case "3": /*Circulo*/
+                        try
+                        {
+                            Console.WriteLine("Introduzca el radio");
+                            float circleRadius = float.Parse(Console.ReadLine());
+
+                            figure = new Circle(circleRadius);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Error: Introduzca un valor numérico válido.");
+                            Console.ReadKey();
+                        }
+
+                        break;
+
+                    case "4": /*Triangulo*/
+                        try
+                        {
+                            Console.WriteLine("Introduzca la base");
+                            float triangleBase = float.Parse(Console.ReadLine());
+
+                            Console.WriteLine("Introduzca la altura");
+                            float triangleHeight = float.Parse(Console.ReadLine());
+
+                            figure = new Triangle(triangleBase, triangleHeight);
+                        }
+                        catch (FormatException)
+                        {
+                            Console.WriteLine("Error: Introduzca valores numéricos válidos.");
+                            Console.ReadKey();
+                        }
+
+                        break;
+
+                    default:
+                        Console.WriteLine("Opción no válida.");
+                        Console.ReadKey();
+                        continue;
                 }
 
-                Console.WriteLine($"El area de la figura seleccionada es {area}");
-                Console.WriteLine("¿Desea seleccionar una nueva figura?")
-            Console.WriteLine("1.Sí");
-                Console.WriteLine("2.No");
-                int respuesta = int.Parse(Console.ReadLine())
+                if (figure == null)
+                {
+                    Console.WriteLine("No se creó la figura. Pulse una tecla para continuar.");
+                    Console.ReadKey();
+                    continue;
+                }
 
-            if (respuesta == 1)
-            {
-                Console.WriteLine("¿Qué figura desea operar?");
-            Console.WriteLine("1.Rectángulo");
-            Console.WriteLine("2.Cuadrado");
-            Console.WriteLine("3.Círculo");
-            Console.WriteLine("4.Triángulo");
+                Console.WriteLine();
+                Console.WriteLine("Área: " + figure.GetArea());
+                Console.WriteLine();
 
-            int numero = int.Parse(Console.ReadLine());
-            float area = 0;
+                Console.Write("¿Desea seleccionar otra figura? (S/N): ");
+                string answer = Console.ReadLine();
 
-            switch (numero)
-            {
-                case 1: /*Rectangulo*/
-                        Console.WriteLine("Introduzca la base");
-                        int Base = int.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Introduzca la altura");
-                        int altura = int.Parse(Console.ReadLine());
-
-                        Rectangle rectangulo = new Rectangle(Base,altura);
-                        
-                        area = rectangulo.GetArea();
-
-                        break;
-
-                case 2: /*Cuadrado*/
-                        Console.WriteLine("Introduzca el lado");
-                        int lado = int.Parse(Console.ReadLine());
-
-                            Square cuadrado = new Square(lado);
-                            area = cuadrado.GetArea();
-                        
-                        break;
-
-                case 3: /*Circulo*/
-                        Console.WriteLine("Introduzca el radio");
-                        int radio = int.Parse(Console.ReadLine());
-
-                        Circle circulo = new Circle(radio);
-                            area = circulo.GetArea();
-
-                        break;
-
-                case 4: /*Triangulo*/
-                        Console.WriteLine("Introduzca la base");
-                        int baseTriangulo= int.Parse(Console.ReadLine());
-
-                        Console.WriteLine("Introduzca la altura");
-                        int alturaTriangulo = int.Parse(Console.ReadLine());
-
-                        Triangle triangulo= new Triangle(baseTriangulo,alturaTriangulo)
-
-                        area = triangulo.GetArea();
-
-                        break;
+                if (answer.ToUpper() != "S")
+                {
+                    continuar = false;
+                }
             }
 
-            Console.WriteLine($"El area de la figura seleccionada es {area}");
-            Console.WriteLine("¿Desea seleccionar una nueva figura?")
-            Console.WriteLine("1.Sí");
-            Console.WriteLine("2.No");
-            int respuesta= int.Parse(Console.ReadLine())
-
-            if (respuesta == 1)
-            {
-               
-            }
-
-            else if(respuesta == 2)
-            {
-                Console.WriteLine("Gracias por probar la aplicación")
-                continuar = false;
-                   
-            }
-            
+            Console.WriteLine();
+            Console.WriteLine("Programa finalizado.");
+            Console.ReadKey();
+        }
     }
 }
